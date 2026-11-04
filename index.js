@@ -95,15 +95,18 @@ app.get("/api/game/:id", (req, res)=>{
 // POST request to create a new game
 //Test: POST http://localhost:3000/api/game/
 app.post("/api/game", (req, res)=>{
-    const { title, price } = req.body;
+    const { title, publisher, releaseYear, ageRating, price, imageUrl } = req.body;
     // validate Params
     if ( !isGoodStringParam(title) || !isGoodNumericParam(price) ){
         return res.status(400).json({
           message: "Game title and price are required fields"
         });
     }
-    // TODO: Create a new game and add it to the collection 
-    
+
+    // Create a new game with the next available id and add it to the collection
+    const newId = games.length > 0 ? Math.max(...games.map((g) => g.id)) + 1 : 1;
+    const newGame = { id: newId, title, publisher, releaseYear, ageRating, price, imageUrl };
+    games.push(newGame);
 
     res.status(201).json(newGame);
 });
