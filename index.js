@@ -185,10 +185,11 @@ app.delete("/api/game/:id", (req, res) => {
     const gameIx = games.findIndex( (game) => game.id === id);
 
     if(gameIx  === -1){
-        return res.status(404).json({ message: "User not found" });
+        return res.status(404).json({ message: "Game not found!" });
     }
     
-    // TODO: delete the item from the collection
+    // Delete the item from the collection
+    games.splice(gameIx, 1);
 
     res.status(204).send();
 });
