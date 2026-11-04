@@ -74,8 +74,6 @@ app.post("/", (req, res)=>{
 // Test: GET http://localhost:3000/api/games
 app.get("/api/games", (req, res)=>{
   res.status(200).json(games);
-  // TODO: return a JSON object with all games
-
 });
 
 
@@ -87,11 +85,10 @@ app.get("/api/game/:id", (req, res)=>{
   const game = games.find((game) => game.id === id);
 
   if(!game){
-    res.status(400).json({message: "Game not found!"});
+    return res.status(404).json({message: "Game not found!"});
   }
-  
-  // TODO: return a JSON object with the single game
 
+  res.status(200).json(game);
 });
 
 
@@ -190,4 +187,3 @@ app.delete("/api/game/:id", (req, res) => {
 app.listen(port, ()=> {
     console.log(`Server started listening on port ${port}`);
 });
-
