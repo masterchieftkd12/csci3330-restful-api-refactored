@@ -120,7 +120,7 @@ app.put("/api/game/:id", (req, res) => {
     if(!game){
       return res.status(404).json({ message: "Game not found!" });
     }
-    const { title, price } = req.body;
+    const { title, publisher, releaseYear, ageRating, price, imageUrl } = req.body;
     // validate Params
     if ( !isGoodStringParam(title) || !isGoodNumericParam(price) ){
         return res.status(400).json({
@@ -128,7 +128,13 @@ app.put("/api/game/:id", (req, res) => {
         });
     }
 
-    //TODO: replace all data elements coming from the PUT request
+    // Replace all data elements coming from the PUT request (id stays the same)
+    game.title = title;
+    game.publisher = publisher;
+    game.releaseYear = releaseYear;
+    game.ageRating = ageRating;
+    game.price = price;
+    game.imageUrl = imageUrl;
     
     res.status(200).json(game);
 
