@@ -160,8 +160,8 @@ app.patch("/api/game/:id", (req, res) => {
             });
         }
 
-        // TODO: udpate the game's title
-        
+        // Update the game's title
+        game.title = title;
     }
 
     // Check whether the price field was provided, if so updated it!
@@ -172,7 +172,8 @@ app.patch("/api/game/:id", (req, res) => {
             });
         }
 
-        // TODO: udpate the game's price
+        // Update the game's price
+        game.price = price;
     }
 
     res.status(200).json(game);
